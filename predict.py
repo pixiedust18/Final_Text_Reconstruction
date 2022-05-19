@@ -168,7 +168,7 @@ def main():
 
         print(pred_letter)
         x = letter_write.pop()
-        letter_write.add(x)
+        letter_write.append(x)
         if not final_res.any() and pref_col == i:
             final_res = res
             print("saved")
