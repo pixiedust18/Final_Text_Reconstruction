@@ -94,8 +94,8 @@ def my_autocorrect(words, incomplete_word, flag, start="", end = ""):
 
   return(output)
 
-/*def missing_letters(correct, wrong):
-    return set(correct) - set(wrong)*/
+'''def missing_letters(correct, wrong):
+    return set(correct) - set(wrong)'''
 def missing_letters(correct, wrong):
     res = []
     pos = []
