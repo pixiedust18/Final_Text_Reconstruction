@@ -221,7 +221,7 @@ def final_integration(img_name, img_path, letter_write, word_list, border, pos_w
   prediction_groups = pipeline.recognize([sharp_im])
   keras_ocr.tools.drawAnnotations(image=sharp_im, predictions=prediction_groups[0])
   sl = letter_write.pop()
-  letter_write.add(sl)
+  letter_write.append(sl)
   if prediction_groups==[[]] or prediction_groups[0][0][0].lower==sl.lower():
     sharp_im  = keras_ocr.tools.read('results/result.png')
     prediction_groups = pipeline.recognize([sharp_im])
