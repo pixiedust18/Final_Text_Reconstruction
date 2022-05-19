@@ -94,8 +94,27 @@ def my_autocorrect(words, incomplete_word, flag, start="", end = ""):
 
   return(output)
 
+/*def missing_letters(correct, wrong):
+    return set(correct) - set(wrong)*/
 def missing_letters(correct, wrong):
-    return set(correct) - set(wrong)
+    res = []
+    pos = []
+    j=0
+    for i in range(len(correct)):
+      if j>=len(wrong):
+        pos.append(-1)
+        res.append(correct[i])
+        continue
+      if correct[i] == wrong[j]:
+        #print(correct[i])
+        j+=1
+      else:
+        #print("SDF",correct[i])
+        pos.append(i)
+        res.append(correct[i])
+    return res, pos
+    #return set(correct) - set(wrong)
+#set(word_list['Word'].iloc[0].lower())
 
 def get_craft_coords(img_name):
   #f = open("/content/CRAFT-pytorch/result/res_"+img_name+".txt", "r")
@@ -186,7 +205,7 @@ def sharpen_image(translated_im):
   #cv2_imshow(image_sharp)
   return image_sharp
 
-def final_integration(img_name, img_path, letter_write, word_list, border):
+def final_integration(img_name, img_path, letter_write, word_list, border, pos_write):
   img= cv2.imread(img_path)
 
   translated_im = cv2.imread('results/result.png')
@@ -225,10 +244,9 @@ def final_integration(img_name, img_path, letter_write, word_list, border):
       #text_extraction = image_sharp[0+30:a-30, i-lol:j+lol]
       #cv2_imshow(text_extraction)
 
-      for i in letter_write:
-        text = str(i).upper()
-      result = word_list['Word'].iloc[0].upper().find(text)
-
+      for i in range(len(letter_write)):
+        text = str(letter_write[i]).upper()
+        result = pos_write[i]
 
       if (result==0):
         img[y1[0]-10:y3[0]+10, x1[0]+lol-text_extraction.shape[1]:x1[0]+lol] = text_extraction
