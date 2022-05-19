@@ -132,7 +132,7 @@ def main():
       incomplete_word+=prediction_words[0][i+1][0]
       flag = True
     word_list = my_autocorrect(words, incomplete_word, flag, start, end)
-    letter_write = missing_letters(word_list['Word'].iloc[0].lower(), incomplete_word)
+    letter_write, write_pos = missing_letters(word_list['Word'].iloc[0].lower(), incomplete_word)
     print(word_list['Word'].iloc[0].lower())
     col = np.mean(img)
     pref_col = 0
@@ -162,7 +162,7 @@ def main():
         non_stylised_gen(img_name, img_path, letter_write, i)
         SRNet_execute('cur_test/i_s.png', 'cur_test/i_t.png', args.checkpoint, save_dir='results/') ####
         result_path = 'results/result.png'
-        pred_letter, res = final_integration(img_name,'results/inpainted_im.png', letter_write, word_list, i)
+        pred_letter, res = final_integration(img_name,'results/inpainted_im.png', letter_write, word_list, i, write_pos)
         #plt.imshow(res)
         #cv2.imwrite(str(i)+'.png', res)
 
